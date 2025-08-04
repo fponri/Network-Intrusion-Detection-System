@@ -1,7 +1,3 @@
-"""
-Training module for the Network Intrusion Detection System
-Compatible with your existing ids.py code structure
-"""
 
 from models_updated import initialize_random_forest, initialize_logistic_regression
 import numpy as np
