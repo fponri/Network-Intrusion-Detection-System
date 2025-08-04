@@ -1,7 +1,3 @@
-"""
-Enhanced data handling module maintaining compatibility with your original ids.py style
-Now supports real datasets while preserving your exact function signatures and approach
-"""
 
 import pandas as pd
 import numpy as np
@@ -10,17 +6,12 @@ from sklearn.model_selection import train_test_split
 import time
 import os
 
-# Global variables matching your original approach
 scaler = StandardScaler()
 feature_columns = None
 
 def load_data(filepath):
-    """
-    Enhanced version of your original load_data function
-    Now supports both local files and real dataset loading
-    """
     try:
-        # First try to load the specified file
+        
         if os.path.exists(filepath):
             data = pd.read_csv(filepath)
             print("\033[92m" + "Data loaded successfully.\n" + "\033[0m")
@@ -33,7 +24,7 @@ def load_data(filepath):
                 print("\033[92m" + f"Data loaded from {filename} successfully.\n" + "\033[0m")
                 return data
             
-            # Look for any UNSW-NB15 files in current directory
+            
             unsw_files = [f for f in os.listdir('.') if 'UNSW' in f and f.endswith('.csv')]
             if unsw_files:
                 data = pd.read_csv(unsw_files[0])
@@ -51,16 +42,12 @@ def load_data(filepath):
         return None
 
 def preprocess_data(data, fit_scaler=False, is_train=False):
-    """
-    Enhanced version of your original preprocess_data function
-    Maintains your exact approach while handling real network intrusion data
-    """
+    
     global feature_columns, scaler
     
     if data is not None:
         data = data.copy()
         
-        # Handle missing values using your forward fill approach
         data.ffill(inplace=True)
         
         # Standardize label column name if needed
@@ -84,7 +71,6 @@ def preprocess_data(data, fit_scaler=False, is_train=False):
                 data[col] = le.fit_transform(data[col].astype(str))
                 label_encoders[col] = le
         
-        # Use your original get_dummies approach for any remaining categorical data
         data_encoded = pd.get_dummies(data)
         
         if is_train:
@@ -105,9 +91,7 @@ def preprocess_data(data, fit_scaler=False, is_train=False):
         return None, None
 
 def simulate_data_stream(data, batch_size=100):
-    """
-    Your original simulate_data_stream function - unchanged
-    """
+    
     data_copy = data.copy()
     for i in range(0, len(data_copy), batch_size):
         yield data_copy.iloc[i:i + batch_size]
